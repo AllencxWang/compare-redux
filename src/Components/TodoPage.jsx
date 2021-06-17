@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import TodoList from './TodoList';
 import TodoListItem from './TodoListItem';
 
-const TodoPage = () => {
+const TodoPage = ({ setTodoCount }) => {
   const [text, setText] = useState('');
   const [todos, setTodos] = useState([]);
   const handleChange = useCallback(
@@ -10,17 +10,21 @@ const TodoPage = () => {
     [setText]
   );
 
+  useEffect(() => () => setTodoCount(0), []);
+
   const handleClick = useCallback(() => {
     if (!text) return;
+    setTodoCount(todos.length + 1);
     setTodos([...todos, { id: Date.now(), text }]);
     setText('');
-  }, [text, setText, todos]);
+  }, [text, setText, todos, setTodos, setTodoCount]);
 
   const handleRemove = useCallback(
     (id) => {
+      setTodoCount(todos.length - 1);
       setTodos(todos.filter((todo) => todo.id !== id));
     },
-    [todos, setTodos]
+    [todos, setTodos, setTodoCount]
   );
 
   return (

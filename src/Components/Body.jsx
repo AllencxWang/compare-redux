@@ -4,7 +4,7 @@ import EmptyPage from './EmptyPage';
 import LeftNav from './LeftNav';
 import LeftNavItem from './LeftNavItem';
 
-const Body = () => {
+const Body = ({ setTodoCount }) => {
   const [Page, setPage] = useState(() => EmptyPage);
   const switchToEmptyPage = useCallback(
     () => setPage(() => EmptyPage),
@@ -20,7 +20,7 @@ const Body = () => {
         <LeftNavItem onClick={switchToEmptyPage}>Empty Page</LeftNavItem>
         <LeftNavItem onClick={switchToTodoPage}>Todo Page</LeftNavItem>
       </LeftNav>
-      <Page />
+      <Page setTodoCount={setTodoCount} />
     </div>
   );
 };
