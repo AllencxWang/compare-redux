@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import TodoList from './TodoList';
 import TodoListItem from './TodoListItem';
 
-const TodoPage = () => {
+const PageTodo = () => {
   const [text, setText] = useState('');
   const [todos, setTodos] = useState([]);
   const handleChange = useCallback(
@@ -24,7 +24,7 @@ const TodoPage = () => {
   );
 
   return (
-    <div className='todo-page'>
+    <div className='page-todo'>
       <TodoList>
         {todos.map((todo) => (
           <TodoListItem key={todo.id} onClick={() => handleRemove(todo.id)}>
@@ -45,4 +45,4 @@ const TodoPage = () => {
   );
 };
 
-export default TodoPage;
+export default PageTodo;

@@ -1,24 +1,24 @@
 import { useState, useCallback } from 'react';
-import TodoPage from './TodoPage';
-import EmptyPage from './EmptyPage';
+import PageTodo from './PageTodo';
+import PageEmpty from './PageEmpty';
 import LeftNav from './LeftNav';
 import LeftNavItem from './LeftNavItem';
 
 const Body = () => {
-  const [Page, setPage] = useState(() => EmptyPage);
-  const switchToEmptyPage = useCallback(
-    () => setPage(() => EmptyPage),
+  const [Page, setPage] = useState(() => PageEmpty);
+  const switchToPageEmpty = useCallback(
+    () => setPage(() => PageEmpty),
     [setPage]
   );
-  const switchToTodoPage = useCallback(
-    () => setPage(() => TodoPage),
+  const switchToPageTodo = useCallback(
+    () => setPage(() => PageTodo),
     [setPage]
   );
   return (
     <div className='body'>
       <LeftNav>
-        <LeftNavItem onClick={switchToEmptyPage}>Empty Page</LeftNavItem>
-        <LeftNavItem onClick={switchToTodoPage}>Todo Page</LeftNavItem>
+        <LeftNavItem onClick={switchToPageEmpty}>Page - Empty</LeftNavItem>
+        <LeftNavItem onClick={switchToPageTodo}>Page - Todo</LeftNavItem>
       </LeftNav>
       <Page />
     </div>

@@ -38,14 +38,14 @@
   cursor: pointer;
 }
 
-.todo-page {
+.page-todo {
   flex: 4;
   border: 1px solid blue;
   background-color: lightblue;
   padding: 10px;
 }
 
-.empty-page {
+.page-empty {
   flex: 4;
   border: 1px solid red;
   background-color: lightcoral;
