@@ -24,7 +24,7 @@ const TodoPage = ({ todos, addTodo, removeTodo }) => {
     (id) => {
       removeTodo(id);
     },
-    [todos, removeTodo]
+    [removeTodo]
   );
 
   return (
