@@ -49,7 +49,7 @@ const TodoPage = ({ todos, addTodo, removeTodo }) => {
   );
 };
 
-const mapStateToProps = (store) => ({ todos: store.todos });
+const mapStateToProps = (state) => ({ todos: state.todos });
 const mapDispatchToProps = {
   addTodo: addTodoActionCreator,
   removeTodo: removeTodoActionCreator,
