@@ -1,10 +1,14 @@
 import { useState, useCallback } from 'react';
 import TodoList from './TodoList';
 import TodoListItem from './TodoListItem';
+import { connect } from 'react-redux';
+import {
+  addTodo as addTodoActionCreator,
+  removeTodo as removeTodoActionCreator,
+} from '../redux/actions';
 
-const TodoPage = () => {
+const TodoPage = ({ todos, addTodo, removeTodo }) => {
   const [text, setText] = useState('');
-  const [todos, setTodos] = useState([]);
   const handleChange = useCallback(
     (evt) => setText(evt.target.value),
     [setText]
@@ -12,15 +16,15 @@ const TodoPage = () => {
 
   const handleClick = useCallback(() => {
     if (!text) return;
-    setTodos([...todos, { id: Date.now(), text }]);
+    addTodo(text);
     setText('');
-  }, [text, setText, todos]);
+  }, [text, setText, addTodo]);
 
   const handleRemove = useCallback(
     (id) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
+      removeTodo(id);
     },
-    [todos, setTodos]
+    [todos, removeTodo]
   );
 
   return (
@@ -45,4 +49,10 @@ const TodoPage = () => {
   );
 };
 
-export default TodoPage;
+const mapStateToProps = (store) => ({ todos: store.todos });
+const mapDispatchToProps = {
+  addTodo: addTodoActionCreator,
+  removeTodo: removeTodoActionCreator,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoPage);
