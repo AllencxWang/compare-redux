@@ -1,30 +1,33 @@
 import { useState, useCallback } from 'react';
 import TodoList from './TodoList';
 import TodoListItem from './TodoListItem';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   addTodo as addTodoActionCreator,
   removeTodo as removeTodoActionCreator,
 } from '../redux/actions';
 
-const TodoPage = ({ todos, addTodo, removeTodo }) => {
+const TodoPage = () => {
   const [text, setText] = useState('');
   const handleChange = useCallback(
     (evt) => setText(evt.target.value),
     [setText]
   );
 
+  const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
+
   const handleClick = useCallback(() => {
     if (!text) return;
-    addTodo(text);
+    dispatch(addTodoActionCreator(text));
     setText('');
-  }, [text, setText, addTodo]);
+  }, [text, setText, dispatch]);
 
   const handleRemove = useCallback(
     (id) => {
-      removeTodo(id);
+      dispatch(removeTodoActionCreator(id));
     },
-    [removeTodo]
+    [dispatch]
   );
 
   return (
@@ -49,10 +52,4 @@ const TodoPage = ({ todos, addTodo, removeTodo }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ todos: state.todos });
-const mapDispatchToProps = {
-  addTodo: addTodoActionCreator,
-  removeTodo: removeTodoActionCreator,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoPage);
+export default TodoPage;
