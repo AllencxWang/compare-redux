@@ -10,7 +10,7 @@ const PageTodo = () => {
     [setText]
   );
 
-  const handleClick = useCallback(() => {
+  const handleAdd = useCallback(() => {
     if (!text) return;
     setTodos([...todos, { id: Date.now(), text }]);
     setText('');
@@ -39,7 +39,7 @@ const PageTodo = () => {
           value={text}
           onChange={handleChange}
         />
-        <button onClick={handleClick}>Add</button>
+        <button onClick={handleAdd}>Add</button>
       </div>
     </div>
   );
